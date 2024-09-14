@@ -58,6 +58,3 @@ Este é um script em Python que avalia expressões matemáticas ou executa códi
 
 - Se a expressão ou o código não puder ser avaliado ou executado, uma mensagem de erro será exibida no terminal.
 
-## Autor
-
-Este script foi desenvolvido para facilitar a avaliação de expressões matemáticas e a execução de código Python diretamente da área de transferência.
