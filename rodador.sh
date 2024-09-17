@@ -1,32 +1,32 @@
 #!/bin/zsh
 
-# Capture the current clipboard content
+# Captura o conteúdo atual da área de transferência
 clipboard_content=$(xclip -selection clipboard -o)
 
-# Try to evaluate the clipboard content in Python
-result=$(python3 -c "
+# Tenta avaliar o conteúdo da área de transferência em Python
+result=$(python3 -c '
 import sys
 import io
 
-expr = '''$clipboard_content'''
+expr = """'$clipboard_content'"""
 try:
-    # Attempt to evaluate as a mathematical expression
+    # Tenta avaliar como uma expressão matemática
     value = eval(expr)
     if isinstance(value, (int, float)):
         if isinstance(value, int):
             print(value)
         else:
-            print(f'{value:.2f}')
+            print(f"{value:.2f}")
 except:
-    # If it's not a simple mathematical expression, execute it as Python code
+    # Se não for uma expressão matemática simples, executa como código Python
     try:
-        # Capture stdout to handle print outputs
+        # Captura stdout para lidar com saídas de print
         old_stdout = sys.stdout
         sys.stdout = io.StringIO()
 
         exec(expr)
 
-        # Get printed output
+        # Obtém a saída impressa
         printed_output = sys.stdout.getvalue().strip()
         sys.stdout = old_stdout
 
@@ -34,8 +34,8 @@ except:
             print(printed_output)
 
     except Exception as e:
-        print(f'Error: {e}')
-")
+        print(f"Erro: {e}")
+')
 
-# Copy the result to the clipboard
+# Copia o resultado para a área de transferência
 echo -n "$result" | xclip -selection clipboard
